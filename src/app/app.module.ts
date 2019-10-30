@@ -17,8 +17,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { NewDeviceComponent } from './new-device/new-device.component';
+import { ErrorComponent } from './error/error.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
-  declarations: [AppComponent, NewDeviceComponent],
+  declarations: [AppComponent, NewDeviceComponent, ErrorComponent, DashboardComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
