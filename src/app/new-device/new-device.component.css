@@ -1,0 +1,24 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.form-container>* {
+  width: 100%;
+}
+
+.id-container>* {
+  width: 105px;
+  margin-right: 10px;
+}
+
+.task-header {
+  background-color: transparent;
+  padding: 0 5px;
+  height: 20px;
+}
+
+.fx-spacer {
+  flex: 1 1 auto;
+}

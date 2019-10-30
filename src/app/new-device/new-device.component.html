@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>
+  <mat-toolbar role="toolbar" class="task-header">
+    <span *ngIf="isEditForm">
+      <mat-slide-toggle (change)="switchGenerateBtn()">Edit Device
+      </mat-slide-toggle>
+    </span>
+    <span *ngIf="!isEditForm"> Add New Device </span>
+
+    <span class="fx-spacer"></span>
+    <button mat-icon-button (click)="onNoClick()">
+      <mat-icon mat-list-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+</h1>
+<form [formGroup]="newDeviceForm">
+  <div mat-dialog-content style="height: 600px;">
+    <div class="form-container">
+      <mat-form-field>
+        <input matInput required placeholder="UNIQUE ID" formControlName="unique_id" style="width: 320px;" />
+      </mat-form-field>
+      <button mat-stroked-button (click)="onGenerateNewID()" [disabled]="onEditField" style="margin-bottom: 20px;">
+        Generate
+      </button>
+
+      <mat-form-field>
+        <input matInput required placeholder="Name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Note" formControlName="note" style="height: 90px;"></textarea>
+      </mat-form-field>
+      <div class="id-container">
+        <mat-form-field>
+          <input matInput required placeholder="Location ID" formControlName="location_id" />
+          <mat-hint>Only Numbers</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput required placeholder="Category ID" formControlName="category_id" />
+          <mat-hint>Only Numbers</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput required placeholder="Space ID" formControlName="space_id" />
+          <mat-hint>Only Numbers</mat-hint>
+        </mat-form-field>
+      </div>
+
+
+      <mat-form-field style="margin-top: 20px;">
+        <input matInput placeholder="Date Created" formControlName="date_created" />
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions style="float: right;">
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [disabled]="!newDeviceForm.valid" type="submit" (click)="onSubmit()">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
