@@ -20,37 +20,36 @@
 
           <ng-container matColumnDef="unique_id">
             <th mat-header-cell *matHeaderCellDef style="width: 26%"> Unique ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.unique_id}} </td>
+            <td mat-cell *matCellDef="let element">
+              {{element.name}} <br>
+              <br>{{element.unique_id}}<br>
+              <button mat-stroked-button (click)="copyId(element.unique_id)">{{copyText}}</button>
+
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef style="width: 13%"> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <ng-container matColumnDef="note">
+            <th mat-header-cell *matHeaderCellDef style="width: 30%"> Note </th>
+            <td mat-cell *matCellDef="let element" style="vertical-align: top;"> {{element.note}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="note" style="width: 20%">
-            <th mat-header-cell *matHeaderCellDef> Note </th>
-            <td mat-cell *matCellDef="let element"> {{element.note}} </td>
-          </ng-container>
+          <ng-container matColumnDef="configuration" style="width: 20%">
+            <th mat-header-cell *matHeaderCellDef> Configuration </th>
+            <td mat-cell *matCellDef="let element" style="vertical-align: top;">
+              Location ID : <strong>{{element.location_id}}</strong><br>
+              Hours View ID : <strong>{{element.hours_view_id}}</strong><br>
+              Category ID : <strong>{{ element. category_id}}</strong><br>
+              Space (Room) ID: <strong>{{ element.space_id}}</strong><br>
 
-          <ng-container matColumnDef="location_id">
-            <th mat-header-cell *matHeaderCellDef style="width: 5%"> Location <br>ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.location_id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="category_id">
-            <th mat-header-cell *matHeaderCellDef style="width: 5%"> Category <br>ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.category_id}} </td>
-          </ng-container>
-          <ng-container matColumnDef="space_id">
-            <th mat-header-cell *matHeaderCellDef style="width: 5%"> Space<br> ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.space_id}} </td>
+
+            </td>
           </ng-container>
           <ng-container matColumnDef="latest_update">
             <th mat-header-cell *matHeaderCellDef style="width: 9%"> Latest Update </th>
-            <td mat-cell *matCellDef="let element"> {{element.date_created}} </td>
+            <td mat-cell *matCellDef="let element" style="vertical-align: top;"> {{element.latest_update}} </td>
           </ng-container>
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef style="width: 4%"> Status </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 4%"> Active </th>
             <td mat-cell *matCellDef="let element">
               <mat-slide-toggle [checked]=element.active (click)="onUpdateStatus(element)"></mat-slide-toggle>
             </td>
@@ -58,10 +57,10 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef style="width: 1%"> Action </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button (click)="onEdit(element)">
+              <button mat-icon-button (click)="onEdit(element)" style="color: green">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="onDelete(element._id)">
+              <button mat-icon-button (click)="onDelete(element._id)" style="color: #bb3535">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>

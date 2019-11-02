@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewDeviceComponent } from '../new-device/new-device.component';
 import { IDevice } from '../models/device';
 import { DeviceService } from '../services/device.service';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,20 +17,21 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = [
     'position',
     'unique_id',
-    'name',
     'note',
-    'location_id',
-    'category_id',
-    'space_id',
+    'configuration',
     'latest_update',
     'status',
     'action'
   ];
   dataSource = new MatTableDataSource<IDevice>();
-
+  copyText: string = 'Copy ID';
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(public dialog: MatDialog, private deviceService: DeviceService) {}
+  constructor(
+    public dialog: MatDialog,
+    private deviceService: DeviceService,
+    private clipboardService: ClipboardService
+  ) {}
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
     this.loadDevices();
@@ -38,6 +40,10 @@ export class DashboardComponent implements OnInit {
     this.deviceService.getDevices().subscribe(data => {
       this.dataSource.data = data;
     });
+  }
+  copyId(value: string) {
+    this.clipboardService.copyFromContent(value);
+    this.copyText = 'Copied';
   }
   onUpdateStatus(device: IDevice): void {
     device.active = !device.active;
