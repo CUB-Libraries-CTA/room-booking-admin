@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,11 +21,17 @@ import { NewDeviceComponent } from './new-device/new-device.component';
 import { ErrorComponent } from './error/error.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
-  declarations: [AppComponent, NewDeviceComponent, ErrorComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    NewDeviceComponent,
+    ErrorComponent,
+    DashboardComponent
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ClipboardModule,
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
