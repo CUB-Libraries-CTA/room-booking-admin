@@ -63,7 +63,7 @@ export class NewDeviceComponent implements OnInit {
       this.newDeviceForm.get('unique_id').setValue(this.data.unique_id);
       this.newDeviceForm.get('name').setValue(this.data.name);
       this.newDeviceForm.get('location_id').setValue(this.data.location_id);
-      this.newDeviceForm.get('category_id').setValue(this.data.location_id);
+      this.newDeviceForm.get('category_id').setValue(this.data.category_id);
       this.newDeviceForm.get('hours_view_id').setValue(this.data.hours_view_id);
       this.newDeviceForm.get('space_id').setValue(this.data.space_id);
       this.newDeviceForm.get('note').setValue(this.data.note);
