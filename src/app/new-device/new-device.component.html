@@ -16,9 +16,11 @@
   <div mat-dialog-content style="height: 600px;">
     <div class="form-container">
       <mat-form-field>
-        <input matInput required placeholder="UNIQUE ID" formControlName="unique_id" style="width: 320px;" />
+        <input matInput required placeholder="UNIQUE ID"
+          formControlName="unique_id" style="width: 320px;" />
       </mat-form-field>
-      <button mat-stroked-button (click)="onGenerateNewID()" [disabled]="onEditField" style="margin-bottom: 20px;">
+      <button mat-stroked-button (click)="onGenerateNewID()"
+        [disabled]="onEditField" style="margin-bottom: 20px;">
         Generate
       </button>
 
@@ -26,19 +28,28 @@
         <input matInput required placeholder="Name" formControlName="name" />
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput placeholder="Note" formControlName="note" style="height: 90px;"></textarea>
+        <textarea matInput placeholder="Note" formControlName="note"
+          style="height: 90px;"></textarea>
       </mat-form-field>
       <div class="id-container">
         <mat-form-field>
-          <input matInput required placeholder="Location ID" formControlName="location_id" />
+          <input matInput required placeholder="Location ID"
+            formControlName="location_id" />
           <mat-hint>Only Numbers</mat-hint>
         </mat-form-field>
         <mat-form-field>
-          <input matInput required placeholder="Hours View ID" formControlName="hours_view_id" />
+          <input matInput required placeholder="Category ID"
+            formControlName="category_id" />
           <mat-hint>Only Numbers</mat-hint>
         </mat-form-field>
         <mat-form-field>
-          <input matInput required placeholder="Space ID" formControlName="space_id" />
+          <input matInput required placeholder="Hours View ID"
+            formControlName="hours_view_id" />
+          <mat-hint>Only Numbers</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput required placeholder="Space ID"
+            formControlName="space_id" />
           <mat-hint>Only Numbers</mat-hint>
         </mat-form-field>
 
@@ -46,13 +57,15 @@
 
 
       <mat-form-field style="margin-top: 20px;">
-        <input matInput placeholder="Latest Update" formControlName="latest_update" />
+        <input matInput placeholder="Latest Update"
+          formControlName="latest_update" />
       </mat-form-field>
     </div>
 
     <div mat-dialog-actions style="float: right;">
       <button mat-button (click)="onNoClick()">Cancel</button>
-      <button mat-button [disabled]="!newDeviceForm.valid" type="submit" (click)="onSubmit()">
+      <button mat-button [disabled]="!newDeviceForm.valid" type="submit"
+        (click)="onSubmit()">
         Submit
       </button>
     </div>
