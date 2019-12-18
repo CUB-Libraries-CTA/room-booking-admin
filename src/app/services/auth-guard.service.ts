@@ -9,8 +9,13 @@ import { Observable } from 'rxjs';
 import { env } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 const userUrl = env.apiUrl + '/user/?format=json';
-import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import {
+  LOCAL_STORAGE,
+  SESSION_STORAGE,
+  StorageService,
+} from 'ngx-webstorage-service';
 import { map, catchError } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +24,9 @@ export class AuthGuard implements CanActivate {
   constructor(
     private http: HttpClient,
     private router: Router,
-    @Inject(LOCAL_STORAGE) private storage: StorageService
+    @Inject(LOCAL_STORAGE) private storageL: StorageService,
+    @Inject(SESSION_STORAGE) private storageS: StorageService,
+    private deviceDetectorService: DeviceDetectorService
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -32,9 +39,14 @@ export class AuthGuard implements CanActivate {
             this.router.navigate(['/error']);
             return false;
           }
-          // TODO Set token only for android device. Will do it when all done with the project
-
-          this.storage.set('token', user['authentication']['auth-token']);
+          if (
+            this.deviceDetectorService.device === 'Android' &&
+            this.deviceDetectorService.os === 'Android'
+          ) {
+            this.storageL.set('token', user['authentication']['auth-token']);
+          } else {
+            this.storageS.set('token', user['authentication']['auth-token']);
+          }
           return true;
         } else {
           location.href =
