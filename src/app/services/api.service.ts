@@ -24,8 +24,8 @@ export class ApiService {
     private deviceDetectorService: DeviceDetectorService
   ) {
     if (
-      this.deviceDetectorService.device !== 'Android' &&
-      this.deviceDetectorService.os !== 'Android'
+      this.deviceDetectorService.device === 'Android' &&
+      this.deviceDetectorService.os === 'Android'
     ) {
       this.headers = new HttpHeaders({
         Authorization: 'token ' + this.storageL.get('token'),
