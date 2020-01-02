@@ -9,7 +9,7 @@ import { DeviceService } from '../services/device.service';
 @Component({
   selector: 'app-new-device',
   templateUrl: './new-device.component.html',
-  styleUrls: ['./new-device.component.css']
+  styleUrls: ['./new-device.component.css'],
 })
 export class NewDeviceComponent implements OnInit {
   device: IDevice;
@@ -27,26 +27,26 @@ export class NewDeviceComponent implements OnInit {
     note: new FormControl({ value: null, disabled: false }),
     location_id: new FormControl({ value: null, disabled: false }, [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
     hours_view_id: new FormControl({ value: null, disabled: false }, [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
     space_id: new FormControl({ value: null, disabled: false }, [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
     latest_update: new FormControl(
       { value: '', disabled: true },
       Validators.required
-    )
+    ),
   });
   constructor(
     public dialogRef: MatDialogRef<NewDeviceComponent>,
     private deviceService: DeviceService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.data) {
@@ -83,6 +83,9 @@ export class NewDeviceComponent implements OnInit {
   }
   onSubmit() {
     this.device = this.newDeviceForm.getRawValue();
+
+    this.device.active = this.data ? this.data.active : false;
+
     if (this.data) {
       this.deviceService
         .updateDevice(this.data._id, this.device)

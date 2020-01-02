@@ -1,43 +1,67 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { env } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {
+  LOCAL_STORAGE,
+  SESSION_STORAGE,
+  StorageService,
+} from 'ngx-webstorage-service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
 const API_URL = env.apiUrl;
-const headers = new HttpHeaders({
-  Authorization: 'token ' + sessionStorage.getItem('token')
-});
+// TODO Convert to cookie, not neccesary using token
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-  constructor(private httpClient: HttpClient) {}
+  headers: any;
+  constructor(
+    private httpClient: HttpClient,
+    @Inject(LOCAL_STORAGE) private storageL: StorageService,
+    @Inject(SESSION_STORAGE) private storageS: StorageService,
+    private deviceDetectorService: DeviceDetectorService
+  ) {
+    if (
+      this.deviceDetectorService.device === 'Android' &&
+      this.deviceDetectorService.os === 'Android'
+    ) {
+      this.headers = new HttpHeaders({
+        Authorization: 'token ' + this.storageL.get('token'),
+      });
+    } else {
+      this.headers = new HttpHeaders({
+        Authorization: 'token ' + this.storageS.get('token'),
+      });
+    }
+  }
 
   // API: GET
   public get(path: string): Observable<any> {
     return this.httpClient
-      .get(API_URL + path, { headers })
+      .get(API_URL + path, { headers: this.headers })
       .pipe(catchError(this.formatErrors));
   }
 
   // API: POST
   public post(path: string, body: {}): Observable<any> {
     return this.httpClient
-      .post(API_URL + path, body, { headers })
+      .post(API_URL + path, body, { headers: this.headers })
       .pipe(catchError(this.formatErrors));
   }
 
   // API: DELETE
   public delete(path: string): Observable<any> {
     return this.httpClient
-      .delete(API_URL + path, { headers })
+      .delete(API_URL + path, { headers: this.headers })
       .pipe(catchError(this.formatErrors));
   }
 
   // API: PUT
   public put(path: string, body: {}): Observable<any> {
     return this.httpClient
-      .put(API_URL + path, body, { headers })
+      .put(API_URL + path, body, { headers: this.headers })
       .pipe(catchError(this.formatErrors));
   }
 

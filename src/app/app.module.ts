@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ClipboardModule } from 'ngx-clipboard';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ClipboardModule,
+    DeviceDetectorModule.forRoot(),
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,
