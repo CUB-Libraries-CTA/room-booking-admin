@@ -46,7 +46,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // TODO Only able to active / deactive at the tablet device, admin can add device at any device.
   onUpdateStatus(device: IDevice): void {
     if (
       this.deviceDetectorService.device === 'Android' &&
