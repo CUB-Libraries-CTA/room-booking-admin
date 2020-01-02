@@ -9,7 +9,7 @@ import { DeviceService } from '../services/device.service';
 @Component({
   selector: 'app-new-device',
   templateUrl: './new-device.component.html',
-  styleUrls: ['./new-device.component.css']
+  styleUrls: ['./new-device.component.css'],
 })
 export class NewDeviceComponent implements OnInit {
   device: IDevice;
@@ -27,20 +27,20 @@ export class NewDeviceComponent implements OnInit {
     note: new FormControl({ value: null, disabled: false }),
     location_id: new FormControl({ value: null, disabled: false }, [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
-    category_id: new FormControl({ value: null, disabled: false }, [
+    hours_view_id: new FormControl({ value: null, disabled: false }, [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
     space_id: new FormControl({ value: null, disabled: false }, [
       Validators.required,
-      Validators.pattern('^[0-9]*$')
+      Validators.pattern('^[0-9]*$'),
     ]),
-    date_created: new FormControl(
+    latest_update: new FormControl(
       { value: '', disabled: true },
       Validators.required
-    )
+    ),
   });
   constructor(
     public dialogRef: MatDialogRef<NewDeviceComponent>,
@@ -53,29 +53,29 @@ export class NewDeviceComponent implements OnInit {
       this.isEditForm = true;
       this.onEditField = true;
       this.newDeviceForm.controls['location_id'].disable();
-      this.newDeviceForm.controls['category_id'].disable();
       this.newDeviceForm.controls['space_id'].disable();
+      this.newDeviceForm.controls['hours_view_id'].disable();
       this.newDeviceForm.get('unique_id').setValue(this.data.unique_id);
       this.newDeviceForm.get('name').setValue(this.data.name);
       this.newDeviceForm.get('location_id').setValue(this.data.location_id);
-      this.newDeviceForm.get('category_id').setValue(this.data.category_id);
+      this.newDeviceForm.get('hours_view_id').setValue(this.data.hours_view_id);
       this.newDeviceForm.get('space_id').setValue(this.data.space_id);
       this.newDeviceForm.get('note').setValue(this.data.note);
     }
     this.newDeviceForm
-      .get('date_created')
+      .get('latest_update')
       .setValue(new Date().toLocaleDateString());
   }
   switchGenerateBtn() {
     this.onEditField = !this.onEditField;
     if (this.onEditField) {
       this.newDeviceForm.controls['location_id'].disable();
-      this.newDeviceForm.controls['category_id'].disable();
       this.newDeviceForm.controls['space_id'].disable();
+      this.newDeviceForm.controls['hours_view_id'].disable();
     } else {
       this.newDeviceForm.controls['location_id'].enable();
-      this.newDeviceForm.controls['category_id'].enable();
       this.newDeviceForm.controls['space_id'].enable();
+      this.newDeviceForm.controls['hours_view_id'].enable();
     }
   }
   onGenerateNewID() {
@@ -83,6 +83,9 @@ export class NewDeviceComponent implements OnInit {
   }
   onSubmit() {
     this.device = this.newDeviceForm.getRawValue();
+
+    this.device.active = this.data ? this.data.active : false;
+
     if (this.data) {
       this.deviceService
         .updateDevice(this.data._id, this.device)

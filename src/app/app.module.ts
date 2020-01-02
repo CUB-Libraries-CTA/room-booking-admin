@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,12 +18,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { NewDeviceComponent } from './new-device/new-device.component';
+import { ErrorComponent } from './error/error.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
-  declarations: [AppComponent, NewDeviceComponent],
+  declarations: [
+    AppComponent,
+    NewDeviceComponent,
+    ErrorComponent,
+    DashboardComponent
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DeviceDetectorModule.forRoot(),
     AppRoutingModule,
     MatTableModule,
     MatPaginatorModule,

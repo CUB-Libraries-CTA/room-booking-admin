@@ -4,8 +4,8 @@ export interface IDevice {
   name: string;
   note: string;
   location_id: number;
-  category_id: number;
   space_id: number;
-  date_created: string;
+  hours_view_id: number;
+  latest_update: string;
   active: boolean;
 }
