@@ -2,8 +2,20 @@
     <input #csvInput hidden="true" type="file" onclick="this.value=null" multiple (change)="csvInputChange($event)" accept=".csv"/>
     <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Log Files (CSV)</button>
 </div>
-<div style="text-align: left; margin-top: 20px;" *ngIf="completed">
+<div style="text-align: center; margin-top: 20px;" *ngIf="!completed && init">
+    <img src="assets/search.gif" width="300">
+
+</div>
+ <div style="text-align: left; margin-top: 20px;" *ngIf="completed">
     <table style=" margin: 0 auto;" cellpadding="5">
+        <tr>
+            <td style="vertical-align: top;"> Files Loaded: </td>
+            <td>
+                <span *ngFor="let file of files">
+                    {{file}}<br>
+                </span>
+            </td>
+        </tr>
         <tr>
             <td> Total Number of Swipe</td>
             <td>{{nSwipe}}</td>
@@ -21,7 +33,11 @@
             <td>{{nSSwipe}}</td>
         </tr>
         <tr>
-            <td>Number of Error due to limitation</td>
+            <td>Number of Faculty Swipe </td>
+            <td>{{nFSwipe}}</td>
+        </tr>
+        <tr>
+            <td>Number of Alerts</td>
             <td>{{nError}}</td>
         </tr>
         <tr>
