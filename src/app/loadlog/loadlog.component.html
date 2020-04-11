@@ -1,0 +1,73 @@
+<div style="text-align: center;">
+    <input #csvInput hidden="true" type="file" onclick="this.value=null" multiple (change)="csvInputChange($event)" accept=".csv"/>
+    <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Log Files (CSV)</button>
+</div>
+<div style="text-align: center; margin-top: 20px;" *ngIf="!completed && init">
+    <img src="assets/search.gif" width="300">
+
+</div>
+ <div style="text-align: left; margin-top: 20px;" *ngIf="completed">
+    <table style=" margin: 0 auto;" cellpadding="5">
+        <tr>
+            <td style="vertical-align: top;"> Files Loaded: </td>
+            <td>
+                <span *ngFor="let file of files">
+                    {{file}}<br>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td> Total Number of Swipe</td>
+            <td>{{nSwipe}}</td>
+        </tr>
+        <tr>
+            <td>Number of Undergraduate Student Swipe</td>
+            <td>{{nUGSwipe}}</td>
+        </tr>
+        <tr>
+            <td> Number of Graduate Student Swipe</td>
+            <td>{{nGSwipe}}</td>
+        </tr>
+        <tr>
+            <td>Number of Staff Swipe </td>
+            <td>{{nSSwipe}}</td>
+        </tr>
+        <tr>
+            <td>Number of Faculty Swipe </td>
+            <td>{{nFSwipe}}</td>
+        </tr>
+        <tr>
+            <td>Number of Alerts</td>
+            <td>{{nError}}</td>
+        </tr>
+        <tr>
+            <td>Red Room</td>
+            <td>{{nRedRoom}}</td>
+        </tr>
+        <tr>
+            <td>Orange Room</td>
+            <td>{{nOrangeRoom}}</td>
+        </tr>
+        <tr>
+            <td>Green Room</td>
+            <td>{{nGreenRoom}}</td>
+        </tr>
+        <tr>
+            <td>Violet Room</td>
+            <td>{{nVioletRoom}}</td>
+        </tr>
+        <tr>
+            <td>Blue Room</td>
+            <td>{{nBlueRoom}}</td>
+        </tr>
+        <tr>
+            <td>Yellow Room</td>
+            <td>{{nYellowRoom}}</td>
+        </tr>
+        <tr>
+            <td>Purple Room</td>
+            <td>{{nPurpleRoom}}</td>
+        </tr>
+    </table>
+
+</div>
