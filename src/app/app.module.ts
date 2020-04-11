@@ -20,12 +20,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NewDeviceComponent } from './new-device/new-device.component';
 import { ErrorComponent } from './error/error.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoadlogComponent } from './loadlog/loadlog.component';
 @NgModule({
   declarations: [
     AppComponent,
     NewDeviceComponent,
     ErrorComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoadlogComponent
   ],
   imports: [
     BrowserModule,

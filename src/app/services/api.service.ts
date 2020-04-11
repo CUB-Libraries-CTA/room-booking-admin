@@ -44,6 +44,13 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
+  // API: GET
+  public getFullURL(url: string): Observable<any> {
+    return this.httpClient
+      .get(url, { headers: this.headers })
+      .pipe(catchError(this.formatErrors));
+  }
+
   // API: POST
   public post(path: string, body: {}): Observable<any> {
     return this.httpClient
