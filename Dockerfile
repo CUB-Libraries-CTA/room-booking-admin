@@ -2,10 +2,6 @@
 
 FROM node:lts-alpine as builder
 
-#This is default value
-#Use 'app' as an argument from command line to build PROD or TESTING enviroment
-ARG app=room-booking-admin-test
-
 # Set working directory.
 RUN mkdir /app
 WORKDIR /app
@@ -13,20 +9,18 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
+ARG ENV=staging
+
 RUN npm ci
 
 COPY . /app
 
 ## Build the angular app in production mode and store the artifacts in dist folder
 
-RUN npm run ng build -- --prod --aot --vendor-chunk --common-chunk --output-path=dist --buildOptimizer --base-href /${app}/
+RUN npm run ng build -- --prod --aot --output-path=dist --buildOptimizer --base-href /room-booking-admin/ --configuration=${ENV}
 
 # ### STAGE 2: Setup ###
 
 FROM nginx:alpine
 
-#This is default value
-#Use 'app' as an argument from command line to build PROD or TESTING enviroment
-ARG app=room-booking-admin-test
-
-COPY --from=0 /app/dist /usr/share/nginx/html/${app}
+COPY --from=0 /app/dist /usr/share/nginx/html/room-booking-admin
