@@ -1,7 +1,7 @@
 # Room Booking Admin
 
 This project providing an admin console to room booking project.
-The admin of this project can delete, edit, activate the devices in room booking project.
+The admin of this project can add, delete, edit the devices in room booking project.
 
 ## Installing
 ```
@@ -17,13 +17,13 @@ ng serve -o
 
 
 ## Build
-PROD:
+PRODUCTION:
 ```
-docker build --build-arg app=room-booking-admin -t culibraries/room-booking-admin:[version]
+docker build --build-arg ENV=production -t culibraries/room-booking-admin:[version]
 ```
 TESTING:
 ```
-docker build --build-arg app=room-booking-admin -t culibraries/room-booking-admin:testing-[version]
+docker build --build-arg ENV=staging -t culibraries/room-booking-admin:[version]-staging
 ```
 Push to DockerHub:
 ```
