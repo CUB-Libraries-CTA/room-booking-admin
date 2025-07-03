@@ -1,3 +1,5 @@
+⚠️ This repository is archived and is no longer maintained or in use. It remains available for reference only.
+
 # Room Booking Admin
 
 This project providing an admin console to room booking project.
